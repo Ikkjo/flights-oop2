@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : Flight.h
+// Name        : FlightNumber.h
 // Author      : Ilija Kalinic SW65/2019 
-// Date        : 
+// Date        : 28.12.2020.
 // Copyright   : 
-// Description : 
+// Description : FlightNumber class header
 //============================================================================
 #pragma once
 
@@ -12,13 +12,17 @@
 
 class FlightNumber
 {
-private:
-	std::string f_num;
+
 public:
+	std::string f_num;
+
 	FlightNumber(std::string);
-	static bool isFlightNumber(std::string);
-	bool operator==(const FlightNumber& other);
-	bool operator>(const FlightNumber& other);
+
+	static bool isFlightNum(std::string);
+
+	bool operator==(const FlightNumber& p_rhs);
+	bool operator>(const FlightNumber& p_rhs);
+	bool operator<(const FlightNumber& p_rhs);
 
 };
 

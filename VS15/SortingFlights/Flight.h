@@ -5,19 +5,19 @@
 // Copyright   : 
 // Description : 
 //============================================================================
-#include <string>
 #pragma once
 
-
-using namespace std;
+#include <string>
+#include "FlightNumber.h"
+#include "GateNumber.h"
 
 class Flight
 {
 private:
-	string destination;
-	string departure;
-	string flight_num;
-	string gate_num;
+	std::string destination;
+	std::string departure;
+	FlightNumber flight_num;
+	GateNumber gate_num;
 public:
 
 };
