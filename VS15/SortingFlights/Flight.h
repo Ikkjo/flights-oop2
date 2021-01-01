@@ -8,16 +8,33 @@
 #pragma once
 
 #include <string>
-#include "FlightNumber.h"
-#include "GateNumber.h"
+
+using namespace std;
 
 class Flight
 {
 private:
-	std::string destination;
-	std::string departure;
-	FlightNumber flight_num;
-	GateNumber gate_num;
-public:
+	string destination;
+	string departure;
+	string flight_num;
+	string gate_num;
 
-};
+	static bool isFlightNum(string);
+	static bool isGateNum(string);
+
+public:
+	Flight(std::string, std::string, std::string, std::string);
+
+	string getNumber();
+	string getGateNumber();
+	string getDeparture();
+	string getDestination();
+
+	void setNumber(string);
+	void setGateNumber(string);
+	void setDeparture(string);
+	void setDestination(string);
+
+	bool operator==(const Flight& p_rhs);
+}
+;
