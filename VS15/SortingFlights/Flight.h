@@ -8,6 +8,7 @@
 #pragma once
 
 #include <string>
+#include <regex>
 
 using namespace std;
 
@@ -37,4 +38,3 @@ public:
 
 	bool operator==(const Flight& p_rhs);
 }
-;
