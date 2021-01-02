@@ -17,24 +17,28 @@ class Flight
 private:
 	string destination;
 	string departure;
-	string flight_num;
-	string gate_num;
+	string flightNo;
+	string gateNo;
 
-	static bool isFlightNum(string);
-	static bool isGateNum(string);
+	static bool isFlightNo(string);
+	static bool isGateNo(string);
 
 public:
+	Flight();
 	Flight(std::string, std::string, std::string, std::string);
+	~Flight();
 
-	string getNumber();
-	string getGateNumber();
+	string getFlightNo();
+	string getGateNo();
 	string getDeparture();
 	string getDestination();
 
-	void setNumber(string);
-	void setGateNumber(string);
+	void setFlightNo(string);
+	void setGateNo(string);
 	void setDeparture(string);
 	void setDestination(string);
 
-	bool operator==(const Flight& p_rhs);
-}
+	bool operator==(const Flight &p_rhs);
+	Flight& operator=(const Flight &p_rhs);
+
+};
