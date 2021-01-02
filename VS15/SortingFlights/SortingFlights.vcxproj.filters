@@ -39,9 +39,6 @@
     <ClCompile Include="graph_lib\Window.cpp">
       <Filter>graph_lib</Filter>
     </ClCompile>
-    <ClCompile Include="FlightNumber.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flight.h">
@@ -67,9 +64,6 @@
     </ClInclude>
     <ClInclude Include="graph_lib\Window.h">
       <Filter>graph_lib</Filter>
-    </ClInclude>
-    <ClInclude Include="FlightNumber.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
