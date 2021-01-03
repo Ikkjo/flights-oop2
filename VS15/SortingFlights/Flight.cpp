@@ -13,11 +13,12 @@
 Flight::Flight() {
 	flightNo = "AA000";
 	gateNo = "A0";
-	destination = string();
-	departure = string();
+	destination = std::string();
+	departure = std::string();
 };
 
-Flight::Flight(string f_num, string dest, string depart, string gate_num) {
+Flight::Flight(std::string f_num, std::string dest,
+			   std::string depart, std::string gate_num) {
 	Flight::setFlightNo(f_num);
 	this->destination = dest;
 	this->departure = depart;
@@ -61,47 +62,47 @@ bool Flight::isFlightNo(std::string str) {
 
 // Getters
 
-string Flight::getDeparture() {
+std::string Flight::getDeparture() {
 	return this->departure;
 }
 
-string Flight::getFlightNo() {
+std::string Flight::getFlightNo() {
 	return this->flightNo;
 }
 
-string Flight::getGateNo() {
+std::string Flight::getGateNo() {
 	return this->gateNo;
 }
 
-string Flight::getDestination() {
+std::string Flight::getDestination() {
 	return this->destination;
 }
 
 // Setters
 
-void Flight::setFlightNo(string fl_num) {
+void Flight::setFlightNo(std::string fl_num) {
 	if (Flight::isFlightNo(fl_num)) {
 		this->flightNo = fl_num;
 	}
 	else {
-		throw exception("Invalid Flight Number format! (Should be like: AB123)");
+		throw std::exception("Invalid Flight Number format! (Should be like: AB123)");
 	}
 }
 
-void Flight::setGateNo(string gate_num) {
+void Flight::setGateNo(std::string gate_num) {
 	if (Flight::isGateNo(gate_num)) {
 		this->gateNo = gate_num;
 	}
 	else {
-		throw exception("Invalid Gate Number format! (Should be like: A0)");
+		throw std::exception("Invalid Gate Number format! (Should be like: A0)");
 	}
 }
 
-void Flight::setDeparture(string departure) {
+void Flight::setDeparture(std::string departure) {
 	this->departure = departure;
 }
 
-void Flight::setDestination(string destination) {
+void Flight::setDestination(std::string destination) {
 	this->destination = destination;
 }
 
@@ -136,10 +137,10 @@ Flight& Flight::operator=(const Flight &p_rhs) {
 	flightNo_buffer[flightNo_len] = '\0';
 	gateNo_buffer[gateNo_len] = '\0';
 
-	this->destination = string(destination_buffer);
-	this->departure = string(departure_buffer);
-	this->flightNo = string(flightNo_buffer);
-	this->gateNo = string(gateNo_buffer);
+	this->destination = std::string(destination_buffer);
+	this->departure = std::string(departure_buffer);
+	this->flightNo = std::string(flightNo_buffer);
+	this->gateNo = std::string(gateNo_buffer);
 
 	return *this;
 }

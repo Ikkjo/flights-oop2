@@ -10,33 +10,32 @@
 #include <string>
 #include <regex>
 
-using namespace std;
 
 class Flight
 {
 private:
-	string destination;
-	string departure;
-	string flightNo;
-	string gateNo;
+	std::string destination;
+	std::string departure;
+	std::string flightNo;
+	std::string gateNo;
 
-	static bool isFlightNo(string);
-	static bool isGateNo(string);
+	static bool isFlightNo(std::string);
+	static bool isGateNo(std::string);
 
 public:
 	Flight();
 	Flight(std::string, std::string, std::string, std::string);
 	~Flight();
 
-	string getFlightNo();
-	string getGateNo();
-	string getDeparture();
-	string getDestination();
+	std::string getFlightNo();
+	std::string getGateNo();
+	std::string getDeparture();
+	std::string getDestination();
 
-	void setFlightNo(string);
-	void setGateNo(string);
-	void setDeparture(string);
-	void setDestination(string);
+	void setFlightNo(std::string);
+	void setGateNo(std::string);
+	void setDeparture(std::string);
+	void setDestination(std::string);
 
 	bool operator==(const Flight &p_rhs);
 	Flight& operator=(const Flight &p_rhs);
