@@ -1,4 +1,4 @@
-Destination Departure Flight No. Gate No.
+Destination; Departure; Flight No.; Gate No.;
 LAS VEGAS; 21:15; AA223; A3; 
 DALLAS; 21:00; BA036; A3; 
 LONDON; 20:30; AA220; B4; 
