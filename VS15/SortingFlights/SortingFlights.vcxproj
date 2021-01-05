@@ -163,6 +163,7 @@
     <ClInclude Include="graph_lib\Simple_window.h" />
     <ClInclude Include="graph_lib\std_lib_facilities.h" />
     <ClInclude Include="graph_lib\Window.h" />
+    <ClInclude Include="IOException.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>
   <ItemGroup>

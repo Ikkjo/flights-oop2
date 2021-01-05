@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Flight.cpp
-// Author      : 
-// Date        :
+// Author      : Ilija Kalinic SW65/2019
+// Date        : 28.12.2020.
 // Copyright   : 
 // Description : Implementation of the Flight class
 //============================================================================
