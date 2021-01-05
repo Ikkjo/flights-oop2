@@ -153,6 +153,7 @@
     <ClCompile Include="graph_lib\Window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sort.cpp" />
+    <ClCompile Include="FlightDataMember.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flight.h" />
@@ -162,10 +163,11 @@
     <ClInclude Include="graph_lib\Simple_window.h" />
     <ClInclude Include="graph_lib\std_lib_facilities.h" />
     <ClInclude Include="graph_lib\Window.h" />
+    <ClInclude Include="IOException.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\inputFileExample.txt" />
+    <Text Include="..\Resources\inputFileExample.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

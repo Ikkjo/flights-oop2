@@ -9,36 +9,53 @@
 
 #include <string>
 #include <regex>
+#include <iostream>
 
-using namespace std;
 
 class Flight
 {
 private:
-	string destination;
-	string departure;
-	string flightNo;
-	string gateNo;
 
-	static bool isFlightNo(string);
-	static bool isGateNo(string);
+	enum class FlightDataMember {
+		dest,
+		dep,
+		flNo,
+		gtNo
+	};
+
+	std::string destination;
+	std::string departure;
+	std::string flightNo;
+	std::string gateNo;
+
+	static bool is_valid_format(std::string, std::regex, int);
+	static bool is_valid_format(std::string, std::regex, int, int);
+	static bool is_valid_datamember(std::string, FlightDataMember);
 
 public:
+	// Constructors
 	Flight();
 	Flight(std::string, std::string, std::string, std::string);
+	// Destructor
 	~Flight();
 
-	string getFlightNo();
-	string getGateNo();
-	string getDeparture();
-	string getDestination();
+	// Getters
+	std::string getFlightNo();
+	std::string getGateNo();
+	std::string getDeparture();
+	std::string getDestination();
 
-	void setFlightNo(string);
-	void setGateNo(string);
-	void setDeparture(string);
-	void setDestination(string);
+	// Setters
+	void setFlightNo(std::string);
+	void setGateNo(std::string);
+	void setDeparture(std::string);
+	void setDestination(std::string);
 
+	// Operator overloads
 	bool operator==(const Flight &p_rhs);
-	Flight& operator=(const Flight &p_rhs);
+	Flight& operator=(const Flight& p_rhs);
 
+	// I/O stream operators
+	friend std::istream& operator>>(std::istream&, Flight&);
+	friend std::ostream& operator<<(std::ostream&, Flight&);
 };

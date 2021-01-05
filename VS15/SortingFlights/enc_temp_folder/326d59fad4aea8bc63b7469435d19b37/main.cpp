@@ -95,19 +95,14 @@ vector<Flight> readInputFile(string input_file, char delimiter) {
 		getline(ifs, flightNo, delimiter);
 		getline(ifs, gateNo, delimiter);
 
-		//if (dest.start) { dest = dest.substr(1, dest.size()-1); };
+		if (dest.at(0) == '\n') { dest = dest.substr(1, dest.size()-1); };
 		
 		file_contents.push_back(Flight(dest, depart, flightNo, gateNo));
 	}
 
-	/* @TODO: FIX BUG
+	/* @TODO: FIX BUG 
 		last data entry appears twice in vector, second time without destination.
 		The ifs buffer is probably being mishandled.
-		- Fixed?
-		The bug above dosent happen when only 10 data entries are loaded.
-
-	   @TODO: FIX BUG
-	   Newline character appeats in destination when reading the line
 	*/
 	return file_contents;
 
