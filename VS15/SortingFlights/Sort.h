@@ -19,7 +19,7 @@ protected:
 	unsigned long num_cmps;
 public:
 	// main entry point
-	virtual void sort(std::vector<Flight>& data) = 0;
+	virtual void sort(std::vector<Flight>& data, FlightDataMember) = 0;
 	// returns number of comparisons
 	unsigned long getNumCmps();
 	// resets the number of comparisons
@@ -31,6 +31,17 @@ class SelectionSort : public Sort
 {
 public:
 	// main entry point
-	void sort(std::vector<Flight>& data);
+	void sort(std::vector<Flight>& data, FlightDataMember);
+
+private:
+	void _sort_flNo(std::vector<Flight>& data);
+	void _sort_dep(std::vector<Flight>& data);
+	void _sort_dest(std::vector<Flight>& data);
 };
 
+// MergeSort class
+class MergeSort : public Sort {
+public:
+	void sort(std::vector<Flight>& data, FlightDataMember);
+
+};

@@ -11,17 +11,16 @@
 #include <regex>
 #include <iostream>
 
+enum class FlightDataMember {
+	dest,
+	dep,
+	flNo,
+	gtNo
+};
 
 class Flight
 {
 private:
-
-	enum class FlightDataMember {
-		dest,
-		dep,
-		flNo,
-		gtNo
-	};
 
 	std::string destination;
 	std::string departure;
@@ -58,4 +57,6 @@ public:
 	// I/O stream operators
 	friend std::istream& operator>>(std::istream&, Flight&);
 	friend std::ostream& operator<<(std::ostream&, Flight&);
+
+	
 };
