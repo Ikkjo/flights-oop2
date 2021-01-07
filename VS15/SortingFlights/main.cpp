@@ -10,54 +10,32 @@
 #include <fstream>
 #include <vector>
 #include "Flight.h"
+#include "Sort.h"
 // #include "IOException.h"
 
 using namespace std;
 
 vector<Flight> readInputFile(string, char);
 void writeOutputFile(vector<Flight>*, string, char);
+void writeToConsole(vector<Flight>*);
 
 void main(int argc, char* argv[])
 {	
 	string test_in = "C:\\Users\\Ilija\\Git Repos\\GitHub\\flights-oop2\\VS15\\Resources\\inputFileExample.txt";
 	char csv_delimiter = ';';
-
+	
 	try{
 		vector<Flight> flights = readInputFile(test_in, csv_delimiter);
+		MergeSort s = MergeSort();
+		cout << "============Unsorted=============" << endl;
+		writeToConsole(&flights);
+		s.sort(flights, FlightDataMember::dest);
+		cout << "============Sorted===============" << endl;
+		writeToConsole(&flights);
 	}
 	catch (exception e) {
 
 	}
-	
-
-
-
-	/*
-	Previous test:
-
-
-	Flight fl1, fl3;
-	Flight* fl2;
-	try {
-		fl1 = Flight("LAS VEGAS", "21:15", "AA23", "A3");
-	}
-	catch (exception e) {
-		cout << "An error has occured!" << endl;
-		fl1 = Flight("LAS VEGAS", "21:15", "AA023", "A3");
-	}
-	
-	fl2 = new Flight("DALLAS", "21:00", "BA036","A3");
-
-	fl3 = fl1;
-
-	fl1 = *fl2;
-	string fl2flno = fl2->getFlightNo();
-	bool cond = fl1.getFlightNo() == fl2flno;
-	cout << fl3;
-	cout << cond <<endl;
-
-	delete fl2;
-	*/
 	
 }
 
@@ -95,7 +73,15 @@ vector<Flight> readInputFile(string input_file, char delimiter) {
 		getline(ifs, flightNo, delimiter);
 		getline(ifs, gateNo, delimiter);
 
-		//if (dest.start) { dest = dest.substr(1, dest.size()-1); };
+		// Removes \n if dest starts with it
+
+		if (dest.find('\n') != string::npos) {
+			dest.erase(remove(dest.begin(), dest.end(), '\n'),
+				dest.end());
+			dest = dest.substr(1, dest.size()-1);
+		};
+
+		// Adds Flight to vector
 		
 		file_contents.push_back(Flight(dest, depart, flightNo, gateNo));
 	}
@@ -105,9 +91,6 @@ vector<Flight> readInputFile(string input_file, char delimiter) {
 		The ifs buffer is probably being mishandled.
 		- Fixed?
 		The bug above dosent happen when only 10 data entries are loaded.
-
-	   @TODO: FIX BUG
-	   Newline character appeats in destination when reading the line
 	*/
 	return file_contents;
 
@@ -127,4 +110,11 @@ void writeOutputFile(vector<Flight>* sorted_flights, string output_path, char de
 	// Writing to output
 
 
+}
+
+void writeToConsole(vector<Flight>* p_flights) {
+	for (Flight fl : *p_flights) {
+		cout << fl << endl;
+	}
+	cout << endl << endl;
 }
