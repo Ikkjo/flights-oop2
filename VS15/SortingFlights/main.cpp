@@ -18,15 +18,27 @@ using namespace std;
 vector<Flight> readInputFile(string, char);
 void writeOutputFile(vector<Flight>*, string, char);
 void writeToConsole(vector<Flight>*);
+void setParamsFromArgs(int argc, char* argv[], string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort);
+
+FlightDataMember getFDMFromStr(string);
 
 void main(int argc, char* argv[])
 {	
-	string test_in = "C:\\Users\\Ilija\\Git Repos\\GitHub\\flights-oop2\\VS15\\Resources\\inputFileExample.txt";
+	string in_f, out_f;
+	FlightDataMember criterium;
+	bool merge_sort;		// If merge_sort flag is false, the sorting algorithm will be selection sort
+
+
+//	string test_in = "..\\Resources\\inputFileExample.txt";
+
+	setParamsFromArgs(argc, argv, &in_f, &out_f, &criterium, &merge_sort);
 	char csv_delimiter = ';';
 	
+
+
 	try{
-		vector<Flight> flights = readInputFile(test_in, csv_delimiter);
-		MergeSort s = MergeSort();
+		vector<Flight> flights = readInputFile(in_f, csv_delimiter);
+		SelectionSort s = SelectionSort();
 		cout << "============Unsorted=============" << endl;
 		writeToConsole(&flights);
 		s.sort(flights, FlightDataMember::dest);
@@ -117,4 +129,49 @@ void writeToConsole(vector<Flight>* p_flights) {
 		cout << fl << endl;
 	}
 	cout << endl << endl;
+}
+
+FlightDataMember getFDMFromStr(string crit_str) {
+	FlightDataMember criterium;
+
+	if (crit_str == "departure" || crit_str == "dep") {
+		criterium = FlightDataMember::dep;
+	}
+	else if (crit_str == "flNo" || crit_str == "flightNo") {
+		criterium = FlightDataMember::flNo;
+	}
+	else if (crit_str == "gtNo" || crit_str == "gateNo") {
+		criterium = FlightDataMember::gtNo;
+	}
+
+	return criterium;
+}
+
+void setParamsFromArgs(int argc, char* argv[], string* in_f,
+	string* out_f, FlightDataMember* crit, bool* merge_sort) {
+	
+	string default_in_f = "..\\Resources\\inputFileExample.txt";
+	string default_out_f = "..\\Resources\\outputFileExample.txt";
+
+	if (argc >= 4) {
+		*in_f = string(argv[1]);
+		*out_f = string(argv[2]);
+		*crit = getFDMFromStr(string(argv[3]));
+
+		if (argc >= 5) {
+			if (argv[4] == "merge") {
+				*merge_sort = true;
+			} 
+		}
+		else {
+			*merge_sort = false;
+		}
+	}
+	else
+	{
+		*in_f = default_in_f;
+		*out_f = default_out_f;
+		*crit = FlightDataMember::flNo;
+		*merge_sort = false;
+	}
 }
