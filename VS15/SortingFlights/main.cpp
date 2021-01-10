@@ -11,6 +11,8 @@
 #include <vector>
 #include "Flight.h"
 #include "Sort.h"
+#include "MainWindow.h"
+
 // #include "IOException.h"
 
 using namespace std;
@@ -19,6 +21,7 @@ vector<Flight> readInputFile(string, string* header, char);
 void writeOutputFile(vector<Flight>*, string, string, char);
 void writeToConsole(vector<Flight>*);
 void setParamsFromArgs(int argc, char* argv[], string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort);
+void GUI_main();
 
 FlightDataMember getFDMFromStr(string);
 
@@ -31,11 +34,17 @@ void main(int argc, char* argv[])
 
 //	string test_in = "..\\Resources\\inputFileExample.txt";
 
-	setParamsFromArgs(argc, argv, &in_f, &out_f, &criterium, &merge_sort);
+	if (argc > 1) {
+		setParamsFromArgs(argc, argv, &in_f, &out_f, &criterium, &merge_sort);
+	}
+	else {
+		GUI_main();
+	}
+	
 	char csv_delimiter = ';';
 	
 
-
+	/*
 	try{
 		vector<Flight> flights = readInputFile(in_f, &header, csv_delimiter);
 		SelectionSort s = SelectionSort();
@@ -51,7 +60,7 @@ void main(int argc, char* argv[])
 	catch (exception e) {
 
 	}
-	
+	*/
 }
 
 vector<Flight> readInputFile(string input_file, string* header, char delimiter) {
@@ -195,4 +204,10 @@ void setParamsFromArgs(int argc, char* argv[], string* in_f,
 		*crit = FlightDataMember::dep;
 		*merge_sort = false;
 	}
+}
+
+
+void GUI_main() {
+	MainWindow win(Point(200, 200), WINDOW_W, WINDOW_H, "Flight Sorter");
+	win.getParameterOptions();
 }
