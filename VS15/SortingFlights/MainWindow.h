@@ -9,6 +9,7 @@
 
 #include "Simple_window.h"
 #include "Graph.h"
+#include "Flight.h"
 
 using namespace Graph_lib;
 
@@ -17,12 +18,12 @@ class MainWindow : public Window
 private:
 	Button sortButton;
 	Button quitButton;
-/*
+
 	In_box inputFileInBox;
 	In_box outputFileInBox;
 	In_box sortAlgInBox;
 	In_box sortCriteriumInBox;
-*/
+
 	static void cb_sort(Address, Address);
 	static void cb_quit(Address, Address);
 
@@ -36,7 +37,7 @@ private:
 	
 public:
 	MainWindow(Point xy, int w, int h, const string& title);
-	void getParameterOptions();
+	void getParameterOptions(string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort);
 	~MainWindow();
 };
 

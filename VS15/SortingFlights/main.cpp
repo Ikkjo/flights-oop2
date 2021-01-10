@@ -21,7 +21,7 @@ vector<Flight> readInputFile(string, string* header, char);
 void writeOutputFile(vector<Flight>*, string, string, char);
 void writeToConsole(vector<Flight>*);
 void setParamsFromArgs(int argc, char* argv[], string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort);
-void GUI_main();
+void GUI_main(string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort);
 
 FlightDataMember getFDMFromStr(string);
 
@@ -207,7 +207,8 @@ void setParamsFromArgs(int argc, char* argv[], string* in_f,
 }
 
 
-void GUI_main() {
+void GUI_main(string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort)
+{
 	MainWindow win(Point(200, 200), WINDOW_W, WINDOW_H, "Flight Sorter");
-	win.getParameterOptions();
+	win.getParameterOptions(in_f, out_f, crit, merge_sort);
 }
