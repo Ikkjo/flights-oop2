@@ -15,8 +15,8 @@
 
 using namespace std;
 
-vector<Flight> readInputFile(string, char);
-void writeOutputFile(vector<Flight>*, string, char);
+vector<Flight> readInputFile(string, string* header, char);
+void writeOutputFile(vector<Flight>*, string, string, char);
 void writeToConsole(vector<Flight>*);
 void setParamsFromArgs(int argc, char* argv[], string* in_f, string* out_f, FlightDataMember* crit, bool* merge_sort);
 
@@ -24,10 +24,10 @@ FlightDataMember getFDMFromStr(string);
 
 void main(int argc, char* argv[])
 {	
-	string in_f, out_f;
+	string in_f, out_f, header;
 	FlightDataMember criterium;
 	bool merge_sort;		// If merge_sort flag is false, the sorting algorithm will be selection sort
-
+	
 
 //	string test_in = "..\\Resources\\inputFileExample.txt";
 
@@ -37,13 +37,16 @@ void main(int argc, char* argv[])
 
 
 	try{
-		vector<Flight> flights = readInputFile(in_f, csv_delimiter);
+		vector<Flight> flights = readInputFile(in_f, &header, csv_delimiter);
 		SelectionSort s = SelectionSort();
 		cout << "============Unsorted=============" << endl;
 		writeToConsole(&flights);
 		s.sort(flights, FlightDataMember::dest);
 		cout << "============Sorted===============" << endl;
 		writeToConsole(&flights);
+
+		writeOutputFile(&flights, out_f, header, csv_delimiter);
+
 	}
 	catch (exception e) {
 
@@ -51,7 +54,7 @@ void main(int argc, char* argv[])
 	
 }
 
-vector<Flight> readInputFile(string input_file, char delimiter) {
+vector<Flight> readInputFile(string input_file, string* header, char delimiter) {
 	/* NOTE: 
 	*		- handles only CSV files with a char as a delimiter AND first line as header
 	*		- there must be EXACTLY 4 data fields, corresponding to Flight constructor parameters,
@@ -78,6 +81,7 @@ vector<Flight> readInputFile(string input_file, char delimiter) {
 	
 	string csv_header;
 	getline(ifs, csv_header);
+	*header = csv_header;
 	
 	while (!ifs.eof() && file_contents.size() < 10) {
 		getline(ifs, dest, delimiter);
@@ -109,7 +113,7 @@ vector<Flight> readInputFile(string input_file, char delimiter) {
 }
 
 
-void writeOutputFile(vector<Flight>* sorted_flights, string output_path, char delimiter) {
+void writeOutputFile(vector<Flight>* sorted_flights, string output_path, string header, char delimiter) {
 	ofstream ofs;
 	ofs.open(output_path);
 
@@ -119,8 +123,25 @@ void writeOutputFile(vector<Flight>* sorted_flights, string output_path, char de
 		throw exception("Invalid output file path!");
 	}
 
-	// Writing to output
+	// Writing to output file
+	string dest;
+	string depart;
+	string flightNo;
+	string gateNo;
+	string csv_line;
 
+	ofs << header << endl;
+
+	for (Flight fl : *sorted_flights) {
+		dest = fl.getDestination();
+		depart = fl.getDeparture();
+		flightNo = fl.getFlightNo();
+		gateNo = fl.getGateNo();
+
+		csv_line = dest + delimiter + depart + delimiter + flightNo + delimiter + gateNo + delimiter;
+
+		ofs << csv_line << endl;
+	}
 
 }
 
@@ -134,15 +155,15 @@ void writeToConsole(vector<Flight>* p_flights) {
 FlightDataMember getFDMFromStr(string crit_str) {
 	FlightDataMember criterium;
 
-	if (crit_str == "departure" || crit_str == "dep") {
-		criterium = FlightDataMember::dep;
-	}
-	else if (crit_str == "flNo" || crit_str == "flightNo") {
+	if (crit_str == "flNo" || crit_str == "flightNo") {
 		criterium = FlightDataMember::flNo;
 	}
 	else if (crit_str == "gtNo" || crit_str == "gateNo") {
 		criterium = FlightDataMember::gtNo;
+	} else {
+		criterium = FlightDataMember::dep;
 	}
+	
 
 	return criterium;
 }
@@ -171,7 +192,7 @@ void setParamsFromArgs(int argc, char* argv[], string* in_f,
 	{
 		*in_f = default_in_f;
 		*out_f = default_out_f;
-		*crit = FlightDataMember::flNo;
+		*crit = FlightDataMember::dep;
 		*merge_sort = false;
 	}
 }
