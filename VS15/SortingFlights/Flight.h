@@ -59,8 +59,8 @@ public:
 	friend std::ostream& operator<<(std::ostream&, Flight&);
 
 	// Other functions
-	std::vector<Flight> copy(std::vector<Flight> flights);
-	Flight copy(Flight fl);
+	static std::vector<Flight> copy(std::vector<Flight> flights);
+	static Flight copy(Flight fl);
 
 	
 };
