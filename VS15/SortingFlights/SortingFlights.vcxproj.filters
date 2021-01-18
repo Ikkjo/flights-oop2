@@ -39,7 +39,13 @@
     <ClCompile Include="graph_lib\Window.cpp">
       <Filter>graph_lib</Filter>
     </ClCompile>
-    <ClCompile Include="FlightDataMember.cpp">
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SortingData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,8 +77,22 @@
     <ClInclude Include="IOException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SortingData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Resources\inputFileExample.txt" />
+    <Text Include="..\Resources\inputFileExample.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Resources\outputFileExample.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

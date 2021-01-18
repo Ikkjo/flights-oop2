@@ -1,9 +1,7 @@
 //============================================================================
 // Name        : Flight.h
 // Author      : Ilija Kalinic SW65/2019 
-// Date        : 
-// Copyright   : 
-// Description : 
+// Description : Main class for data manipulation
 //============================================================================
 #pragma once
 
@@ -11,17 +9,16 @@
 #include <regex>
 #include <iostream>
 
+enum class FlightDataMember {
+	dest,
+	dep,
+	flNo,
+	gtNo
+};
 
 class Flight
 {
 private:
-
-	enum class FlightDataMember {
-		dest,
-		dep,
-		flNo,
-		gtNo
-	};
 
 	std::string destination;
 	std::string departure;
@@ -58,4 +55,10 @@ public:
 	// I/O stream operators
 	friend std::istream& operator>>(std::istream&, Flight&);
 	friend std::ostream& operator<<(std::ostream&, Flight&);
+
+	// Other functions
+	static std::vector<Flight> copy(std::vector<Flight> flights);
+	static Flight copy(Flight fl);
+
+	
 };

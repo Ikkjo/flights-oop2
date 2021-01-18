@@ -146,16 +146,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="Flight.cpp" />
     <ClCompile Include="graph_lib\Graph.cpp" />
     <ClCompile Include="graph_lib\GUI.cpp" />
     <ClCompile Include="graph_lib\Simple_window.cpp" />
     <ClCompile Include="graph_lib\Window.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Sort.cpp" />
-    <ClCompile Include="FlightDataMember.cpp" />
+    <ClCompile Include="SortingData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileHandler.h" />
     <ClInclude Include="Flight.h" />
     <ClInclude Include="graph_lib\Graph.h" />
     <ClInclude Include="graph_lib\GUI.h" />
@@ -164,10 +167,13 @@
     <ClInclude Include="graph_lib\std_lib_facilities.h" />
     <ClInclude Include="graph_lib\Window.h" />
     <ClInclude Include="IOException.h" />
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Sort.h" />
+    <ClInclude Include="SortingData.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\inputFileExample.txt" />
+    <Text Include="..\Resources\outputFileExample.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
