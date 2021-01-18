@@ -1,3 +1,5 @@
+// Unfinished exception classes
+
 #pragma once
 
 #include <iostream>

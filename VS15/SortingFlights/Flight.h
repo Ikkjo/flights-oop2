@@ -1,9 +1,7 @@
 //============================================================================
 // Name        : Flight.h
 // Author      : Ilija Kalinic SW65/2019 
-// Date        : 
-// Copyright   : 
-// Description : 
+// Description : Main class for data manipulation
 //============================================================================
 #pragma once
 

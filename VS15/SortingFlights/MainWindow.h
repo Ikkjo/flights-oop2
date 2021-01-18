@@ -1,4 +1,11 @@
+//============================================================================
+// Name        : MainWindow.h
+// Author      : Ilija Kalinic SW65/2019
+// Description : Main Window class definition for GUI
+//============================================================================
+
 #pragma once
+
 
 #define WINDOW_W			800
 #define WINDOW_H			600
@@ -16,6 +23,8 @@
 #include "Graph.h"
 #include "Flight.h"
 #include "FileHandler.h"
+#include "SortingData.h"
+#include "Sort.h"
 
 using namespace Graph_lib;
 
@@ -24,6 +33,7 @@ class MainWindow : public Window
 private:
 	Button loadButton;
 	Button quitButton;
+	Button nextButton;
 
 	In_box inputFileInBox;
 	In_box outputFileInBox;
@@ -41,26 +51,39 @@ private:
 	Out_box vecPosition8;
 	Out_box vecPosition9;
 
+	Text iterationText;
+	Text numOfCmpsText;
+	Text numOfSwapsText;
+
 	string input_file;
 	string output_file;
 	FlightDataMember sort_crit;
 	bool merge_sort;
 
+	unsigned int current_iter;
+
+	SortingData sort_data;
+
 	static void cb_load(Address, Address);
 	static void cb_quit(Address, Address);
+	static void cb_next(Address, Address);
 
 	bool loadPushed;
 	bool quitPushed;
+	bool nextPushed;
 
 	void load();
 	void quit();
+	void next();
 
 	void updateOutBoxes(vector<Flight>);
+	void updateIterationText(string);
+	void updateNumOfCmpsText(string);
+	void updateNumOfSwapsText(string);
 
-	void showInitialFlights(string* in_f);
+	std::vector<Flight> initializeFlights(std::string in_f, std::string* header);
+	void saveSortedFlights(string out_f, std::vector<Flight>, std::string);
 
-
-	
 public:
 	MainWindow(Point xy, int w, int h, const string& title);
 	void setParameterOptionsAndSort();

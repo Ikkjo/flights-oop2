@@ -1,8 +1,6 @@
 //============================================================================
 // Name        : main.cpp
 // Author      : Ilija Kalinic SW65/2019
-// Date        : 28.12.2020.
-// Copyright   :
 // Description : Main project file used for running the program
 //============================================================================
 
@@ -14,8 +12,6 @@
 #include "MainWindow.h"
 #include "FileHandler.h"
 
-// #include "IOException.h"
-
 using namespace std;
 
 void writeToConsole(vector<Flight>*);
@@ -26,46 +22,48 @@ FlightDataMember getFDMFromStr(string);
 
 void main(int argc, char* argv[])
 {	
-	string in_f, out_f, header;
-	FlightDataMember criterium;
-	bool merge_sort;		// If merge_sort flag is false, the sorting algorithm will be selection sort
 	
+	// Command line arguments example -> inputFileExample.txt out1.txt flNo merge <-
 
-	string test_in = "..\\Resources\\inputFileExample.txt";
+	if (argc > 1) {
+		string test_in = "..\\Resources\\inputFileExample.txt";
+		string header;
+		string in_f = "..\\Resources\\";
+		string out_f = "..\\Resources\\";
+		FlightDataMember criterium;
+		bool merge_sort;		// If merge_sort flag is false, the sorting algorithm will be selection sort
 
-	//if (argc > 1) {
 		setParamsFromArgs(argc, argv, &in_f, &out_f, &criterium, &merge_sort);
-	//}
-	//else {
-	//	GUI_main();
-	//}
-	
-	char csv_delimiter = ';';
-	
 
-	
-	try{
-		vector<Flight> flights = FileHandler::readInputFile(in_f, &header, csv_delimiter);
+		try {
+			char csv_delimiter = ';';
 
-		MergeSort s = MergeSort();
+			vector<Flight> flights = FileHandler::readInputFile(in_f, &header, csv_delimiter);
 
-		cout << "============Unsorted=============" << endl;
+			MergeSort s = MergeSort();
 
-		writeToConsole(&flights);
+			cout << "============Unsorted=============" << endl;
 
-		s.sort(flights, FlightDataMember::dest);
+			writeToConsole(&flights);
 
-		cout << "============Sorted===============" << endl;
+			s.sort(flights, FlightDataMember::dest);
 
-		writeToConsole(&flights);
+			cout << "============Sorted===============" << endl;
 
-		FileHandler::writeOutputFile(&flights, out_f, header, csv_delimiter);
+			writeToConsole(&flights);
+
+			FileHandler::writeOutputFile(&flights, out_f, header, csv_delimiter);
+
+		}
+		catch (exception e) {}
 
 	}
-	catch (exception e) {
-
+	else {
+		try {
+			GUI_main();
+		}
+		catch (exception e) {}
 	}
-	
 }
 
 
@@ -99,8 +97,8 @@ void setParamsFromArgs(int argc, char* argv[], string* in_f,
 	string default_out_f = "..\\Resources\\outputFileExample.txt";
 
 	if (argc >= 4) {
-		*in_f = string(argv[1]);
-		*out_f = string(argv[2]);
+		*in_f += string(argv[1]);
+		*out_f += string(argv[2]);
 		*crit = getFDMFromStr(string(argv[3]));
 
 		if (argc >= 5) {
@@ -114,6 +112,7 @@ void setParamsFromArgs(int argc, char* argv[], string* in_f,
 	}
 	else
 	{
+		cout << "Invalid arguments, sorting with default parameters..." << endl << endl;
 		*in_f = default_in_f;
 		*out_f = default_out_f;
 		*crit = FlightDataMember::dep;

@@ -1,3 +1,10 @@
+//============================================================================
+// Name        : FileHandler.h
+// Author      : Ilija Kalinic SW65/2019
+// Description : File I/O handler class definition
+//============================================================================
+
+
 #pragma once
 
 #include <string>

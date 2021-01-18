@@ -1,5 +1,11 @@
-#include "FileHandler.h"
+//============================================================================
+// Name        : FileHandler.cpp
+// Author      : Ilija Kalinic SW65/2019
+// Description : Read from file and write to file function definitions
+//============================================================================
 
+
+#include "FileHandler.h"
 
 
 vector<Flight> FileHandler::readInputFile(string input_file, string* header, char delimiter) {

@@ -155,6 +155,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Sort.cpp" />
+    <ClCompile Include="SortingData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileHandler.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="IOException.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Sort.h" />
+    <ClInclude Include="SortingData.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Resources\inputFileExample.txt" />

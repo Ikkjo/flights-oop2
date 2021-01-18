@@ -1,9 +1,7 @@
 //============================================================================
 // Name        : Sort.h
 // Author      : Ilija Kalinic
-// Date        :
-// Copyright   : 
-// Description : Sort interface class and various sorting algorithms in C++
+// Description : Sort interface class and two sorting algorithms
 //============================================================================
 #pragma once
 
@@ -16,10 +14,10 @@ class Sort
 {
 protected:
 	// number of comparisons performed in sort function for each iteration
-	std::vector<unsigned long> num_cmps;
+	std::vector<unsigned long> cmps;
 
 	// number of element swapsperformed in sort function for each iteration
-	std::vector<unsigned long> num_swaps;
+	std::vector<unsigned long> swaps;
 
 	// poistions of all flights in vector from beggining to end
 	std::vector<std::vector<Flight>> all_flights;
@@ -27,7 +25,7 @@ protected:
 	// current (sorted) flight iteration
 	std::vector<Flight> *current;
 
-	// number of iterations (should be the same as size of vectors num_cmps, num_swaps, all_flights
+	// number of iterations (should be the same as size of vectors num_cmps, num_swaps, all_flights)
 	unsigned long iter;
 	
 public:
@@ -52,26 +50,6 @@ public:
 
 	unsigned long getIter();
 
-	// setters
-
-	//void setNumSwaps(std::vector<unsigned long>);
-
-	//void setNumCmps(std::vector<unsigned long>);
-
-	//void setAllFlights(std::vector<std::vector<Flight>>);
-
-	//void setCurrentVec(std::vector<Flight>* p_vec);
-
-	//void setIter(unsigned long);
-
-	// additional functions
-
-	void addNumSwaps(unsigned long, int index);
-
-	void addNumCmps(unsigned long, int index);
-
-	void addFlightIter(std::vector<Flight>, int index);
-
 };
 
 // SelectionSort class
@@ -91,7 +69,6 @@ private:
 public:
 
 	MergeSort();
-
 	void sort(std::vector<Flight>& data, FlightDataMember);
 
 };
