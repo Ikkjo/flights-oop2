@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="Flight.cpp" />
     <ClCompile Include="graph_lib\Graph.cpp" />
     <ClCompile Include="graph_lib\GUI.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="FlightDataMember.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileHandler.h" />
     <ClInclude Include="Flight.h" />
     <ClInclude Include="graph_lib\Graph.h" />
     <ClInclude Include="graph_lib\GUI.h" />

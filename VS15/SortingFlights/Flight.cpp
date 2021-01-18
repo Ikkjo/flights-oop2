@@ -207,3 +207,21 @@ std::ostream& operator<<(std::ostream& os, Flight& flight) {
 	return os;
 		
 }
+
+Flight Flight::copy(Flight fl) {
+	Flight ret = fl;
+
+	return ret;
+}
+
+std::vector<Flight> Flight::copy(std::vector<Flight> flights) {
+
+	std::vector<Flight> ret = std::vector<Flight>(flights.size());
+
+	for (Flight fl : flights) {
+		Flight current = fl;
+		ret.push_back(current);
+	}
+
+	return ret;
+}

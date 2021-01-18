@@ -58,5 +58,9 @@ public:
 	friend std::istream& operator>>(std::istream&, Flight&);
 	friend std::ostream& operator<<(std::ostream&, Flight&);
 
+	// Other functions
+	std::vector<Flight> copy(std::vector<Flight> flights);
+	Flight copy(Flight fl);
+
 	
 };

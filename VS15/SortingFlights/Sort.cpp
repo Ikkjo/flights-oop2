@@ -8,54 +8,86 @@
 
 #include "Sort.h"
 
-using namespace std;
+// getter definitions
 
-unsigned long Sort::getNumCmps() {
+std::vector<unsigned long> Sort::getNumCmps() {
 	return this->num_cmps;
 }
 
-void Sort::resetNumCmps() {
-	this->num_cmps = 0;
-}
-
-unsigned long Sort::getNumSwaps() {
+std::vector<unsigned long> Sort::getNumSwaps() {
 	return this->num_swaps;
 }
 
 unsigned long Sort::getIter() {
-	return this->curr_iteration;
+	return this->iter;
 }
 
-vector<Flight> Sort::getCurrentVec() {
+std::vector<Flight> Sort::getCurrentVec() {
 	
-	const vector<Flight> vec_og = *this->current;
-	vector<Flight> vec_cpy = vector<Flight>(vec_og);
+	const std::vector<Flight> vec_og = *this->current;
+	std::vector<Flight> vec_cpy = std::vector<Flight>(vec_og);
 
 	return vec_cpy;
 }
 
-void Sort::resetIter() {
-	this->curr_iteration = 0;
+std::vector<std::vector<Flight>> Sort::getAllFlights() {
+	return this->all_flights;
 }
 
-void Sort::resetNumSwaps() {
-	this->num_swaps = 0;
-}
+// setter definitions
 
-void Sort::setCurrentVec(vector<Flight>* p_vec) {
-	current = p_vec;
-}
+//void Sort::setCurrentVec(std::vector<Flight>* p_vec) {
+//	current = p_vec;
+//}
+//
+//void Sort::setNumSwaps(std::vector<unsigned long>) {
+//	
+//}
+//
+//void Sort::setNumCmps(std::vector<unsigned long>) {
+//
+//}
+//
+//void Sort::setAllFlights(std::vector<std::vector<Flight>>) {
+//
+//}
+//
+//void Sort::setIter(unsigned long) {
+//
+//}
 
-SelectionSort::SelectionSort() {
+Sort::Sort() {
+	num_cmps = std::vector<unsigned long>();
+	num_swaps = std::vector<unsigned long>();
+	all_flights = std::vector<std::vector<Flight>>();
 	current = nullptr;
-	this->curr_iteration = 0;
-	this->num_cmps = 0;
-	this->num_swaps = 0;
+	iter = 0;
 }
 
-void SelectionSort::sort(vector<Flight>& flight_data, FlightDataMember sort_criterium) {
+Sort::~Sort() {}
+
+// additional functions
+
+void Sort::addNumSwaps(unsigned long, int index) {
+
+}
+
+void Sort::addNumCmps(unsigned long, int index) {
+
+}
+
+void Sort::addFlightIter(std::vector<Flight>, int index) {
+
+}
+
+// SelectionSort
+
+SelectionSort::SelectionSort(): Sort() {}
+
+void SelectionSort::sort(std::vector<Flight>& flight_data, FlightDataMember sort_criterium) {
 	
-	// Switch case is used to call corresponding atribute comparison
+	
+	unsigned long num_of_cmps = 0, num_of_swaps = 0, iteration = 0;
 
 	int i, j, min_index;
 	Flight min, sub_first;
@@ -65,10 +97,13 @@ void SelectionSort::sort(vector<Flight>& flight_data, FlightDataMember sort_crit
 
 		min_index = i;
 
-		this->curr_iteration++;
+		
 
 		for (j = i + 1; j < flight_data.size(); j++) {
 
+			current = &flight_data;
+			
+			// Switch case is used to call corresponding atribute comparison
 			switch (sort_criterium) {
 
 			case FlightDataMember::flNo:
@@ -87,7 +122,7 @@ void SelectionSort::sort(vector<Flight>& flight_data, FlightDataMember sort_crit
 				new_min = false;
 				break;
 			}
-			this->num_cmps++;
+			
 
 			if (new_min) {
 				min_index = j;
@@ -97,41 +132,54 @@ void SelectionSort::sort(vector<Flight>& flight_data, FlightDataMember sort_crit
 
 				flight_data[i] = min;
 				flight_data[min_index] = sub_first;
-
-				this->num_swaps++;
+			
+				num_of_swaps++;
 
 			}
+
+			iteration++;
+			num_of_cmps++;
+
+			num_cmps.push_back(num_of_cmps);
+			num_swaps.push_back(num_of_swaps);
+
+			std::vector<Flight> fls_cpy = Flight::copy(flight_data);
+			all_flights.push_back(fls_cpy);
 		}
 			
 	}
+
+	iter = iteration;
 }
 
+//MergeSort
 
-MergeSort::MergeSort() {
-	this->curr_iteration = 0;
-	this->num_cmps = 0;
-	this->num_swaps = 0;
-	current = nullptr;
-}
+MergeSort::MergeSort() : Sort() {}
 
-void MergeSort::sort(vector<Flight>& flight_data, FlightDataMember sort_criterium) {
+void MergeSort::sort(std::vector<Flight>& flight_data, FlightDataMember sort_criterium) {
+
+	
 
 	if (flight_data.size() <= 1) {
 		return;
 	}
 
 	int mid = flight_data.size() / 2;
-	vector<Flight> left(flight_data.begin(), flight_data.end() - mid);
-	vector<Flight> right(flight_data.begin() + mid, flight_data.end());
 
+	std::vector<Flight>left(flight_data.begin(), flight_data.end() - mid);
+	std::vector<Flight>right(flight_data.begin() + mid, flight_data.end());
+
+	//cout << "Sort Left" << endl;
 	sort(left, sort_criterium);
+	//cout << "Sort Right" << endl;
 	sort(right, sort_criterium);
+	//cout << "Merge L and R" << endl;
 	merge(left, right, flight_data, sort_criterium);
 
 
 }
 
-void MergeSort::merge(vector<Flight>& left, vector<Flight>& right, vector<Flight>& result, FlightDataMember sort_crit) {
+void MergeSort::merge(std::vector<Flight>& left, std::vector<Flight>& right, std::vector<Flight>& result, FlightDataMember sort_crit) {
 	int r_size = right.size();
 	int l_size = left.size();
 	int i = 0, j = 0, k = 0;
@@ -157,24 +205,34 @@ void MergeSort::merge(vector<Flight>& left, vector<Flight>& right, vector<Flight
 			break;
 		}
 		if (smaller) {
-			result[i] = left[j];
+			result[i] = std::move(left[j]);
 			j++;
 		}
 		else {
-			result[i] = right[k];
+			result[i] = std::move(left[j]);
 			k++;
 		}
 		i++;
 	}
-	while (j < l_size) {
-		result[i] = left[j];
-		j++;
-		i++;
-	}
-	while (k < r_size) {
-		result[i] = right[k];
-		k++;
-		i++;
-	}
+
+	//if (j < l_size && k < r_size) {
+	std::move(&left[j], &left[l_size - 1], &result[i]);
+	std::move(&right[k], &right[r_size - 1], &result[i]);
+	//}
+	//else if (j >= l_size) {
+	//	move(&left[j - 1], &left[l_size], &result[i]);
+	//	move(&right[k], &right[r_size], &result[i]);
+	//}
+	//else if (k >= l_size) {
+	//	move(&left[j], &left[l_size], &result[i]);
+	//	move(&right[k - 1], &right[r_size], &result[i]);
+	//}
+	//else {
+	//	move(&left[j - 1], &left[l_size], &result[i]);
+	//	move(&right[k - 1], &right[r_size], &result[i]);
+	//}
+
+
+	//cout << r_size << endl << l_size << endl << i << " " << j << " " << k << endl;
 
 }
