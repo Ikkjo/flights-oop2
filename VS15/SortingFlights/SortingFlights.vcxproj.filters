@@ -39,9 +39,6 @@
     <ClCompile Include="graph_lib\Window.cpp">
       <Filter>graph_lib</Filter>
     </ClCompile>
-    <ClCompile Include="FlightDataMember.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
